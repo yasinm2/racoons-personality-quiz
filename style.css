@@ -1,3 +1,4 @@
+/* Genel stiller */
 body {
   font-family: 'Arial', sans-serif;
   margin: 0; 
@@ -45,27 +46,48 @@ button {
   border: none;
   cursor: pointer;
   border-radius: 6px;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  opacity: 0.9;
+  background-color: #5b54cc;
 }
 
-#result {
-  width: 70%;
-  max-width: 600px;
-  margin: 20px auto;
+/* Modal stilleri */
+.overlay {
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none; /* Başta kapalı */
+}
+
+.modal {
+  position: fixed;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
   background: #fff;
-  text-align: center;
-  padding: 20px;
+  width: 90%;
+  max-width: 500px;
   border-radius: 8px;
+  display: none; /* Başta kapalı */
+  overflow: hidden;
+  z-index: 999; /* Overlay'in üstünde */
 }
 
-#result h2 {
+.modal-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.modal-content h2 {
   margin-top: 0;
 }
 
-#result img {
+.modal-content img {
   max-width: 300px;
   margin-top: 20px;
   border: 2px solid #eee;
