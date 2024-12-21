@@ -11,7 +11,7 @@
   
   <form id="quiz-form">
     <!-- Soru 1 -->
-    <div class="question">
+    <div class="question card">
       <p>1) Kendini nasıl tanımlarsın?</p>
       <label>
         <input type="radio" name="q1" value="A" required/>
@@ -32,7 +32,7 @@
     </div>
     
     <!-- Soru 2 -->
-    <div class="question">
+    <div class="question card">
       <p>2) Bir arkadaş ortamında en çok ne yaparsın?</p>
       <label>
         <input type="radio" name="q2" value="A" required/>
@@ -53,7 +53,7 @@
     </div>
     
     <!-- Soru 3 -->
-    <div class="question">
+    <div class="question card">
       <p>3) Sabah uyandığında ilk işin nedir?</p>
       <label>
         <input type="radio" name="q3" value="A" required/>
@@ -74,7 +74,7 @@
     </div>
     
     <!-- Soru 4 -->
-    <div class="question">
+    <div class="question card">
       <p>4) Bir problemi çözerken hangisi daha çok seni yansıtır?</p>
       <label>
         <input type="radio" name="q4" value="A" required/>
@@ -95,7 +95,7 @@
     </div>
     
     <!-- Soru 5 -->
-    <div class="question">
+    <div class="question card">
       <p>5) Hangi aktivite sana daha cazip geliyor?</p>
       <label>
         <input type="radio" name="q5" value="A" required/>
@@ -115,7 +115,9 @@
       </label>
     </div>
     
-    <button type="submit">Sonucumu Göster</button>
+    <div class="btn-container">
+      <button type="submit" class="submit-btn">Sonucumu Göster</button>
+    </div>
   </form>
   
   <!-- Modal (Popup) yapısı -->
