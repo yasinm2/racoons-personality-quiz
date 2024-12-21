@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById("quiz-form");
-  const resultDiv = document.getElementById("result");
+  const resultModal = document.getElementById("resultModal");
+  const overlay = document.getElementById("overlay");
   const resultImage = document.getElementById("result-image");
   
-  // 10 farklı rakun görseli (örneğin).
+  // 10 farklı rakun görseli (örnek)
   const racoonImages = [
     "images/racoon1.png",
     "images/racoon2.png",
@@ -20,10 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
   form.addEventListener("submit", function(e) {
     e.preventDefault();
     
-    // Cevaplardan bir puan toplayalım
+    // 1) Formdan gelen yanıtları okuyup puan hesaplayalım
     let totalScore = 0;
     
-    // 5 sorudan gelen değerleri çek
     for (let i = 1; i <= 5; i++) {
       const answer = form.querySelector(`input[name="q${i}"]:checked`).value;
       switch(answer) {
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
     
-    // Puan aralığına göre hangi görseli seçeceğimizi belirle
+    // 2) Puan aralığına göre hangi görseli seçeceğimizi belirle
     let selectedImageIndex;
     if (totalScore <= 7) {
       selectedImageIndex = 0; 
@@ -66,22 +66,34 @@ document.addEventListener("DOMContentLoaded", function() {
       selectedImageIndex = 9;
     }
     
-    // SLOT MACHINE EFECTI
-    // 1) Hızlı bir şekilde tüm görselleri 5 sn boyunca sırayla göster
-    let currentSlotIndex = 0;
-    resultDiv.style.display = "block"; // Sonuç alanını göster
+    // 3) Modal aç: (Overlay + Modal)
+    overlay.style.display = "block";
+    resultModal.style.display = "block";
     
-    const slotMachineInterval = setInterval(() => {
-      // Her 100ms'de bir sonraki görseli göster
-      resultImage.src = racoonImages[currentSlotIndex];
-      currentSlotIndex = (currentSlotIndex + 1) % racoonImages.length;
-    }, 100);
+    // 4) Slot machine animasyonu (resimler yavaşlayarak dönsün)
+    // Adım adım 10-12 kere dönsün ve her defasında bekleme süresini artıralım
+    let currentIndex = 0;
+    let spinCount = 12;      // Toplam kaç kez dönecek (dilersen değiştir)
+    let initialDelay = 100;  // İlk resim geçiş hızı (ms)
+    let delayIncrement = 50; // Her adımda hızı ne kadar artıralım?
     
-    // 2) 5 saniye (5000ms) sonunda slot machine'i durdur ve asıl görseli göster
-    setTimeout(() => {
-      clearInterval(slotMachineInterval);
-      // Asıl hak edilen resmi göster
-      resultImage.src = racoonImages[selectedImageIndex];
-    }, 5000);
+    // Rekürsif fonksiyon:
+    function spinImages(count, delay) {
+      // Görseli ata
+      resultImage.src = racoonImages[currentIndex];
+      currentIndex = (currentIndex + 1) % racoonImages.length;
+      
+      if (count > 0) {
+        setTimeout(() => {
+          spinImages(count - 1, delay + delayIncrement);
+        }, delay);
+      } else {
+        // Tur bitti, artık final görseli göster
+        resultImage.src = racoonImages[selectedImageIndex];
+      }
+    }
+    
+    // 5) Spin başlasın
+    spinImages(spinCount, initialDelay);
   });
 });
