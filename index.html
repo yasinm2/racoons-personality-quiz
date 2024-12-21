@@ -4,7 +4,102 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Racoon Kişilik Testi</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* === GENEL SAYFA STİLLERİ === */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0; 
+      padding: 0;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: #4d4d4d;
+    }
+
+    form {
+      width: 70%;
+      max-width: 600px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .question {
+      margin-bottom: 15px;
+    }
+
+    .question p {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    label {
+      margin-bottom: 5px;
+      display: inline-block;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 12px 18px;
+      background-color: #6c63ff;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #5b54cc;
+    }
+
+    /* === OVERLAY (ARKA PLAN KARARTMA) === */
+    #overlay {
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);  /* yarı saydam siyah */
+      display: none;      /* Başta kapalı */
+      z-index: 999;       /* İçeriklerin üstünde */
+    }
+
+    /* === SONUÇ KUTUSU (ORTADA) === */
+    #result {
+      position: fixed;
+      top: 50%; 
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      display: none;  /* Başta kapalı */
+      z-index: 1000;  /* Overlay'in de üstünde */
+      width: 80%;
+      max-width: 400px;
+    }
+
+    #result h2 {
+      margin-top: 0;
+    }
+
+    #result img {
+      max-width: 250px;
+      margin-top: 20px;
+      border: 2px solid #eee;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
   <h1>Racoon NFT Kişilik Testi</h1>
@@ -118,15 +213,110 @@
     <button type="submit">Sonucumu Göster</button>
   </form>
   
-  <!-- Modal (Pop-up) Alanı -->
-  <div id="overlay" class="overlay"></div>
-  <div id="resultModal" class="modal">
-    <div class="modal-content">
-      <h2>Kişilik Testi Sonucu</h2>
-      <img id="result-image" src="" alt="Racoon NFT" />
-    </div>
+  <!-- Ekranın ortasında belirecek kutu -->
+  <div id="overlay"></div>
+  <div id="result">
+    <h2>Kişilik Testi Sonucu</h2>
+    <img id="result-image" src="" alt="Racoon NFT"/>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById("quiz-form");
+      const overlay = document.getElementById("overlay");
+      const resultDiv = document.getElementById("result");
+      const resultImage = document.getElementById("result-image");
+      
+      // 10 farklı rakun görseli (örnek)
+      const racoonImages = [
+        "images/racoon1.png",
+        "images/racoon2.png",
+        "images/racoon3.png",
+        "images/racoon4.png",
+        "images/racoon5.png",
+        "images/racoon6.png",
+        "images/racoon7.png",
+        "images/racoon8.png",
+        "images/racoon9.png",
+        "images/racoon10.png"
+      ];
+      
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        
+        // 1) Cevaplardan puan topla
+        let totalScore = 0;
+        for (let i = 1; i <= 5; i++) {
+          const answer = form.querySelector(`input[name="q${i}"]:checked`).value;
+          switch(answer) {
+            case "A":
+              totalScore += 1;
+              break;
+            case "B":
+              totalScore += 2;
+              break;
+            case "C":
+              totalScore += 3;
+              break;
+            case "D":
+              totalScore += 4;
+              break;
+          }
+        }
+        
+        // 2) Puan aralığına göre hangi görseli göstereceğimizi bul
+        let selectedImageIndex;
+        if (totalScore <= 7) {
+          selectedImageIndex = 0; 
+        } else if (totalScore <= 10) {
+          selectedImageIndex = 1;
+        } else if (totalScore <= 12) {
+          selectedImageIndex = 2;
+        } else if (totalScore <= 14) {
+          selectedImageIndex = 3;
+        } else if (totalScore <= 16) {
+          selectedImageIndex = 4;
+        } else if (totalScore === 17) {
+          selectedImageIndex = 5;
+        } else if (totalScore === 18) {
+          selectedImageIndex = 6;
+        } else if (totalScore === 19) {
+          selectedImageIndex = 7;
+        } else if (totalScore === 20) {
+          selectedImageIndex = 8;
+        } else {
+          selectedImageIndex = 9;
+        }
+
+        // 3) Slot machine efekti (yavaşlayarak resimleri çevirme)
+        //    Örnek olarak 12 kez dönecek. İlk hız 100ms, her turda 50ms artarak yavaşlıyor
+        let spinCount = 12;
+        let initialDelay = 100;
+        let delayIncrement = 50;
+        let currentIndex = 0;
+        
+        // Overlay ve sonuç kutusu aç
+        overlay.style.display = "block";
+        resultDiv.style.display = "block";
+        
+        function spinImages(count, delay) {
+          resultImage.src = racoonImages[currentIndex];
+          currentIndex = (currentIndex + 1) % racoonImages.length;
+          
+          if (count > 0) {
+            setTimeout(() => {
+              spinImages(count - 1, delay + delayIncrement);
+            }, delay);
+          } else {
+            // Son tur bitti, final görseli ata
+            resultImage.src = racoonImages[selectedImageIndex];
+          }
+        }
+        
+        // Döndürme başlasın
+        spinImages(spinCount, initialDelay);
+      });
+    });
+  </script>
 </body>
 </html>
