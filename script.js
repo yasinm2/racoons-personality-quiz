@@ -6,16 +6,16 @@ document.addEventListener("DOMContentLoaded", function() {
       
       // 10 farklı rakun görseli (örnek)
       const racoonImages = [
-        "images/racoon1.png",
-        "images/racoon2.png",
-        "images/racoon3.png",
-        "images/racoon4.png",
-        "images/racoon5.png",
-        "images/racoon6.png",
-        "images/racoon7.png",
-        "images/racoon8.png",
-        "images/racoon9.png",
-        "images/racoon10.png"
+        "images/racoons1.jpeg",
+        "images/racoons2.jpeg",
+        "images/racoons3.jpeg",
+        "images/racoons4.jpeg",
+        "images/racoons5.png",
+        "images/racoons6.png",
+        "images/racoons7.png",
+        "images/racoons8.png",
+        "images/racoons9.png",
+        "images/racoons10.png"
       ];
       
       form.addEventListener("submit", function(e) {
