@@ -1,0 +1,40 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background: #fdfdfd;
+    color: #333;
+  }
+  
+  h1 {
+    color: #f76d3c;
+  }
+  
+  .question {
+    margin-bottom: 20px;
+  }
+  
+  button {
+    padding: 10px 15px;
+    background-color: #f76d3c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  #result {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  #result img {
+    max-width: 300px;
+    margin-top: 20px;
+    border: 2px solid #eee;
+    border-radius: 10px;
+  }
+  
