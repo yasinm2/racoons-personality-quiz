@@ -1,45 +1,57 @@
-// script.js
-
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById("quiz-form");
-  const resultDiv = document.getElementById("result");
-  const resultImage = document.getElementById("result-image");
   
-  // 10 farklı rakun görseli (örnek)
-  // Bunları "images" klasörüne koyduğunu varsayıyoruz
-  const racoonImages = [
-      "images/racoons1.jpeg",
-        "images/racoons2.jpeg",
-        "images/racoons3.jpeg",
-        "images/racoons4.jpeg",
-        "images/racoons5.png",
-        "images/racoons6.png",
-        "images/racoons7.png",
-        "images/racoons8.png",
-        "images/racoons9.png",
-        "images/racoons10.png"
-  ];
+  // Modal ve iç öğeler
+  const modal = document.getElementById("result-modal");
+  const modalCloseBtn = document.getElementById("close-modal");
+  const resultImage = document.getElementById("result-image");
+  const restartBtn = document.getElementById("restart-btn");
 
-  // Form gönderildiğinde (submit)
+  // 10 farklı rakun görseli. images klasöründe bulunduklarını varsayıyoruz.
+  const racoonImages = [
+    "images/racoons1.jpeg",
+    "images/racoons2.jpeg",
+    "images/racoons3.jpeg",
+    "images/racoons4.jpeg",
+    "images/racoons5.png",
+    "images/racoons6.png",
+    "images/racoons7.png",
+    "images/racoons8.png",
+    "images/racoons9.png",
+    "images/racoons10.png"
+  ];
+  
   form.addEventListener("submit", function(e) {
     e.preventDefault();
     
-    // 1) Cevapları al ve puan hesapla
+    // Cevaplardan bir puan toplayalım
     let totalScore = 0;
+    
+    // 1. sorudan 5. soruya kadar yanıtları al
     for (let i = 1; i <= 5; i++) {
       const answer = form.querySelector(`input[name="q${i}"]:checked`).value;
+      // Örnek puanlama:
       switch(answer) {
-        case "A": totalScore += 1; break;
-        case "B": totalScore += 2; break;
-        case "C": totalScore += 3; break;
-        case "D": totalScore += 4; break;
+        case "A":
+          totalScore += 1; 
+          break;
+        case "B":
+          totalScore += 2; 
+          break;
+        case "C":
+          totalScore += 3; 
+          break;
+        case "D":
+          totalScore += 4; 
+          break;
       }
     }
-
-    // 2) Toplam puana göre finalde hangi resim çıkacak?
+    
+    // Toplam puan 5 ile 20 arasında olacaktır.
     let selectedImageIndex;
+    
     if (totalScore <= 7) {
-      selectedImageIndex = 0; 
+      selectedImageIndex = 0; // racoons1
     } else if (totalScore <= 10) {
       selectedImageIndex = 1;
     } else if (totalScore <= 12) {
@@ -60,23 +72,31 @@ document.addEventListener("DOMContentLoaded", function() {
       // Her ihtimale karşı
       selectedImageIndex = 9;
     }
+    
+    // Seçilen rakun görselini ayarla
+    resultImage.src = racoonImages[selectedImageIndex];
+    
+    // Modal'ı göster
+    modal.style.display = "block";
+  });
 
-    // 3) Slot machine efekti (5 sn boyunca hızlı resim değişimi)
-    let currentIndex = 0;
-    resultDiv.style.display = "block";  // Ortadaki kutuyu aç
-    const intervalTime = 100;           // 0.1 sn aralıkla resimleri değiştir
-    const spinDuration = 5000;          // 5 sn sonra duracak
+  // Modal kapatma butonu
+  modalCloseBtn.addEventListener("click", function() {
+    modal.style.display = "none";
+  });
 
-    // Her 100ms'de bir resmi değiştir
-    const spinInterval = setInterval(() => {
-      resultImage.src = racoonImages[currentIndex];
-      currentIndex = (currentIndex + 1) % racoonImages.length;
-    }, intervalTime);
+  // "Yeniden Başla" butonu: formu sıfırla ve modal'ı kapat
+  restartBtn.addEventListener("click", function() {
+    // Formu sıfırlamak için:
+    form.reset();
+    // Modal'ı kapatalım
+    modal.style.display = "none";
+  });
 
-    // 5 sn sonra durdur ve final resmi göster
-    setTimeout(() => {
-      clearInterval(spinInterval);
-      resultImage.src = racoonImages[selectedImageIndex];
-    }, spinDuration);
+  // Modal dışına tıklayınca da kapansın (isteğe bağlı)
+  window.addEventListener("click", function(e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
   });
 });
