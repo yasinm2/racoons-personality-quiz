@@ -118,12 +118,15 @@
     <button type="submit">Sonucumu Göster</button>
   </form>
   
-  <div id="result" style="display: none;">
-    <h2>Kişilik Testi Sonucu</h2>
-    <!-- Slot machine animasyonu sırasında bu img sürekli değişecek -->
-    <img id="result-image" src="" alt="Racoon NFT" />
+  <!-- Modal (Pop-up) Alanı -->
+  <div id="overlay" class="overlay"></div>
+  <div id="resultModal" class="modal">
+    <div class="modal-content">
+      <h2>Kişilik Testi Sonucu</h2>
+      <img id="result-image" src="" alt="Racoon NFT" />
+    </div>
   </div>
-  
+
   <script src="script.js"></script>
 </body>
 </html>
