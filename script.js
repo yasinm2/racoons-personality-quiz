@@ -73,11 +73,26 @@ document.addEventListener("DOMContentLoaded", function() {
       selectedImageIndex = 9;
     }
     
-    // Seçilen rakun görselini ayarla
-    resultImage.src = racoonImages[selectedImageIndex];
-    
-    // Modal'ı göster
+    // Modal'ı hemen göster
     modal.style.display = "block";
+
+    // 3.5 saniyelik slayt şovu ayarlayalım
+    let index = 0;
+    const intervalTime = 300;  // 0.3 saniye
+    const totalSlideshowTime = 3500; // 3.5 saniye
+
+    // Her 0.3 saniyede farklı rakun resmini göster
+    const slideShow = setInterval(() => {
+      resultImage.src = racoonImages[index];
+      index = (index + 1) % racoonImages.length; 
+    }, intervalTime);
+
+    // 3.5 saniye sonra slayt'ı durdurup gerçek sonucu göster
+    setTimeout(() => {
+      clearInterval(slideShow);
+      // Gerçek sonuç resmini koyalım
+      resultImage.src = racoonImages[selectedImageIndex];
+    }, totalSlideshowTime);
   });
 
   // Modal kapatma butonu
