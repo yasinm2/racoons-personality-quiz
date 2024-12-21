@@ -1,83 +1,74 @@
-/* style.css */
-
-/* GENEL SAYFA STİLLERİ */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  font-family: sans-serif;
+  margin: 20px;
+  background: #fdfdfd;
   color: #333;
 }
 
 h1 {
-  text-align: center;
-  margin-top: 20px;
-}
-
-form {
-  width: 80%;
-  max-width: 600px;
-  margin: 30px auto;
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
+  color: #f76d3c;
 }
 
 .question {
   margin-bottom: 20px;
 }
 
-.question p {
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-
-label {
-  display: block;
-  margin-bottom: 4px;
-}
-
 button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 16px;
-  font-size: 16px;
-  background-color: #6c63ff;
+  padding: 10px 15px;
+  background-color: #f76d3c;
   color: #fff;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 button:hover {
-  background-color: #5b54cc;
+  opacity: 0.8;
 }
 
-/* EKRANIN ORTASINDA GÖRÜNECEK SONUÇ KUTUSU */
-#result {
-  position: fixed;          /* Her zaman ekranda sabit durur */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  border: 2px solid #333;
-  border-radius: 8px;
-  width: 90%;
+/* Modal (Popup) stili */
+.modal {
+  display: none; /* Gizli başlasın */
+  position: fixed; /* Ekranda sabit */
+  z-index: 999; /* Üstte görünecek */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Gerekirse scroll */
+  background-color: rgba(0, 0, 0, 0.6); /* Saydam siyah arka plan */
+}
+
+.modal-content {
+  position: relative;
+  margin: 15% auto;
+  background-color: #fff;
+  width: 80%;
   max-width: 400px;
   padding: 20px;
-  text-align: center;
-  display: none; /* Başta görünmesin */
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  z-index: 999;
-}
-
-#result h2 {
-  margin-top: 0;
-}
-
-#result img {
-  max-width: 250px;
-  margin-top: 10px;
   border-radius: 8px;
+  text-align: center;
+}
+
+/* Modal kapatma butonu */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: bold;
+  color: #999;
+}
+
+.close-btn:hover {
+  color: #f76d3c;
+}
+
+/* Sonuç içindeki resim stili */
+#result-image {
+  max-width: 100%;
+  margin-top: 20px;
   border: 2px solid #eee;
+  border-radius: 10px;
 }
