@@ -1,221 +1,70 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Racoon Kişilik Testi</title>
-  <style>
-    /* === GENEL SAYFA STİLLERİ === */
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0; 
-      padding: 0;
-      background: linear-gradient(to right, #e0eafc, #cfdef3);
-      color: #333;
-    }
-
-    h1 {
-      text-align: center;
-      margin-top: 20px;
-      color: #4d4d4d;
-    }
-
-    form {
-      width: 70%;
-      max-width: 600px;
-      margin: 30px auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-    }
-
-    .question {
-      margin-bottom: 15px;
-    }
-
-    .question p {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    label {
-      margin-bottom: 5px;
-      display: inline-block;
-    }
-
-    button {
-      display: block;
-      margin: 20px auto;
-      padding: 12px 18px;
-      background-color: #6c63ff;
-      color: #fff;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: background-color 0.3s;
-    }
-
-    button:hover {
-      background-color: #5b54cc;
-    }
-
-    /* === OVERLAY (ARKA PLAN KARARTMA) === */
-    #overlay {
-      position: fixed; 
-      top: 0; 
-      left: 0; 
-      width: 100%; 
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);  /* yarı saydam siyah */
-      display: none;      /* Başta kapalı */
-      z-index: 999;       /* İçeriklerin üstünde */
-    }
-
-    /* === SONUÇ KUTUSU (ORTADA) === */
-    #result {
-      position: fixed;
-      top: 50%; 
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #fff;
-      text-align: center;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-      display: none;  /* Başta kapalı */
-      z-index: 1000;  /* Overlay'in de üstünde */
-      width: 80%;
-      max-width: 400px;
-    }
-
-    #result h2 {
-      margin-top: 0;
-    }
-
-    #result img {
-      max-width: 250px;
-      margin-top: 20px;
-      border: 2px solid #eee;
-      border-radius: 10px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Racoon NFT Kişilik Testi</title>
+  <!-- Harici CSS dosyamızı ekliyoruz -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Racoon NFT Kişilik Testi</h1>
-  
+
   <form id="quiz-form">
     <!-- Soru 1 -->
     <div class="question">
       <p>1) Kendini nasıl tanımlarsın?</p>
-      <label>
-        <input type="radio" name="q1" value="A" required/>
-        Maceracı
-      </label><br/>
-      <label>
-        <input type="radio" name="q1" value="B"/>
-        Sakin
-      </label><br/>
-      <label>
-        <input type="radio" name="q1" value="C"/>
-        Eğlenceli
-      </label><br/>
-      <label>
-        <input type="radio" name="q1" value="D"/>
-        Analitik
-      </label>
+      <label><input type="radio" name="q1" value="A" required> Maceracı</label>
+      <label><input type="radio" name="q1" value="B"> Sakin</label>
+      <label><input type="radio" name="q1" value="C"> Eğlenceli</label>
+      <label><input type="radio" name="q1" value="D"> Analitik</label>
     </div>
-    
+
     <!-- Soru 2 -->
     <div class="question">
       <p>2) Bir arkadaş ortamında en çok ne yaparsın?</p>
-      <label>
-        <input type="radio" name="q2" value="A" required/>
-        Şakalaşır, herkesi güldürürüm
-      </label><br/>
-      <label>
-        <input type="radio" name="q2" value="B"/>
-        Sadece dinlerim
-      </label><br/>
-      <label>
-        <input type="radio" name="q2" value="C"/>
-        Her şeye dahil olurum
-      </label><br/>
-      <label>
-        <input type="radio" name="q2" value="D"/>
-        Sohbeti yönlendiririm
-      </label>
+      <label><input type="radio" name="q2" value="A" required> Şakalaşır, herkesi güldürürüm</label>
+      <label><input type="radio" name="q2" value="B"> Sadece dinlerim</label>
+      <label><input type="radio" name="q2" value="C"> Her şeye dahil olurum</label>
+      <label><input type="radio" name="q2" value="D"> Sohbeti yönlendiririm</label>
     </div>
-    
+
     <!-- Soru 3 -->
     <div class="question">
       <p>3) Sabah uyandığında ilk işin nedir?</p>
-      <label>
-        <input type="radio" name="q3" value="A" required/>
-        Kahve yaparım
-      </label><br/>
-      <label>
-        <input type="radio" name="q3" value="B"/>
-        Sosyal medyaya bakarım
-      </label><br/>
-      <label>
-        <input type="radio" name="q3" value="C"/>
-        Spor yaparım
-      </label><br/>
-      <label>
-        <input type="radio" name="q3" value="D"/>
-        Planlarımı gözden geçiririm
-      </label>
+      <label><input type="radio" name="q3" value="A" required> Kahve yaparım</label>
+      <label><input type="radio" name="q3" value="B"> Sosyal medyaya bakarım</label>
+      <label><input type="radio" name="q3" value="C"> Spor yaparım</label>
+      <label><input type="radio" name="q3" value="D"> Planlarımı gözden geçiririm</label>
     </div>
-    
+
     <!-- Soru 4 -->
     <div class="question">
       <p>4) Bir problemi çözerken hangisi daha çok seni yansıtır?</p>
-      <label>
-        <input type="radio" name="q4" value="A" required/>
-        Yaratıcı çözümler bulurum
-      </label><br/>
-      <label>
-        <input type="radio" name="q4" value="B"/>
-        Her detayı analiz ederim
-      </label><br/>
-      <label>
-        <input type="radio" name="q4" value="C"/>
-        Yardım almayı severim
-      </label><br/>
-      <label>
-        <input type="radio" name="q4" value="D"/>
-        Hızlıca hallederim
-      </label>
+      <label><input type="radio" name="q4" value="A" required> Yaratıcı çözümler bulurum</label>
+      <label><input type="radio" name="q4" value="B"> Her detayı analiz ederim</label>
+      <label><input type="radio" name="q4" value="C"> Yardım almayı severim</label>
+      <label><input type="radio" name="q4" value="D"> Hızlıca hallederim</label>
     </div>
-    
+
     <!-- Soru 5 -->
     <div class="question">
       <p>5) Hangi aktivite sana daha cazip geliyor?</p>
-      <label>
-        <input type="radio" name="q5" value="A" required/>
-        Doğa yürüyüşü
-      </label><br/>
-      <label>
-        <input type="radio" name="q5" value="B"/>
-        Kitap okumak
-      </label><br/>
-      <label>
-        <input type="radio" name="q5" value="C"/>
-        Parti yapmak
-      </label><br/>
-      <label>
-        <input type="radio" name="q5" value="D"/>
-        Yeni hobiler öğrenmek
-      </label>
+      <label><input type="radio" name="q5" value="A" required> Doğa yürüyüşü</label>
+      <label><input type="radio" name="q5" value="B"> Kitap okumak</label>
+      <label><input type="radio" name="q5" value="C"> Parti yapmak</label>
+      <label><input type="radio" name="q5" value="D"> Yeni hobiler öğrenmek</label>
     </div>
-    
+
     <button type="submit">Sonucumu Göster</button>
   </form>
-  
-  <!-- Ekranın ortasında belirecek kutu -->
-  <div id="overlay"></div>
+
+  <!-- Sonucumuzun tam ortada gösterileceği kutu -->
   <div id="result">
     <h2>Kişilik Testi Sonucu</h2>
-    <img id="result-image" src="" alt="Racoon NFT"/>
+    <img id="result-image" src="" alt="Racoon NFT" />
   </div>
+
+  <!-- Harici JavaScript dosyamız -->
+  <script src="script.js"></script>
+</body>
+</html>
