@@ -1,12 +1,14 @@
+// script.js
+
 document.addEventListener("DOMContentLoaded", function() {
-      const form = document.getElementById("quiz-form");
-      const overlay = document.getElementById("overlay");
-      const resultDiv = document.getElementById("result");
-      const resultImage = document.getElementById("result-image");
-      
-      // 10 farklı rakun görseli (örnek)
-      const racoonImages = [
-        "images/racoons1.jpeg",
+  const form = document.getElementById("quiz-form");
+  const resultDiv = document.getElementById("result");
+  const resultImage = document.getElementById("result-image");
+  
+  // 10 farklı rakun görseli (örnek)
+  // Bunları "images" klasörüne koyduğunu varsayıyoruz
+  const racoonImages = [
+      "images/racoons1.jpeg",
         "images/racoons2.jpeg",
         "images/racoons3.jpeg",
         "images/racoons4.jpeg",
@@ -16,84 +18,65 @@ document.addEventListener("DOMContentLoaded", function() {
         "images/racoons8.png",
         "images/racoons9.png",
         "images/racoons10.png"
-      ];
-      
-      form.addEventListener("submit", function(e) {
-        e.preventDefault();
-        
-        // 1) Cevaplardan puan topla
-        let totalScore = 0;
-        for (let i = 1; i <= 5; i++) {
-          const answer = form.querySelector(`input[name="q${i}"]:checked`).value;
-          switch(answer) {
-            case "A":
-              totalScore += 1;
-              break;
-            case "B":
-              totalScore += 2;
-              break;
-            case "C":
-              totalScore += 3;
-              break;
-            case "D":
-              totalScore += 4;
-              break;
-          }
-        }
-        
-        // 2) Puan aralığına göre hangi görseli göstereceğimizi bul
-        let selectedImageIndex;
-        if (totalScore <= 7) {
-          selectedImageIndex = 0; 
-        } else if (totalScore <= 10) {
-          selectedImageIndex = 1;
-        } else if (totalScore <= 12) {
-          selectedImageIndex = 2;
-        } else if (totalScore <= 14) {
-          selectedImageIndex = 3;
-        } else if (totalScore <= 16) {
-          selectedImageIndex = 4;
-        } else if (totalScore === 17) {
-          selectedImageIndex = 5;
-        } else if (totalScore === 18) {
-          selectedImageIndex = 6;
-        } else if (totalScore === 19) {
-          selectedImageIndex = 7;
-        } else if (totalScore === 20) {
-          selectedImageIndex = 8;
-        } else {
-          selectedImageIndex = 9;
-        }
+  ];
 
-        // 3) Slot machine efekti (yavaşlayarak resimleri çevirme)
-        //    Örnek olarak 12 kez dönecek. İlk hız 100ms, her turda 50ms artarak yavaşlıyor
-        let spinCount = 12;
-        let initialDelay = 100;
-        let delayIncrement = 50;
-        let currentIndex = 0;
-        
-        // Overlay ve sonuç kutusu aç
-        overlay.style.display = "block";
-        resultDiv.style.display = "block";
-        
-        function spinImages(count, delay) {
-          resultImage.src = racoonImages[currentIndex];
-          currentIndex = (currentIndex + 1) % racoonImages.length;
-          
-          if (count > 0) {
-            setTimeout(() => {
-              spinImages(count - 1, delay + delayIncrement);
-            }, delay);
-          } else {
-            // Son tur bitti, final görseli ata
-            resultImage.src = racoonImages[selectedImageIndex];
-          }
-        }
-        
-        // Döndürme başlasın
-        spinImages(spinCount, initialDelay);
-      });
-    });
-  </script>
-</body>
-</html>
+  // Form gönderildiğinde (submit)
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    // 1) Cevapları al ve puan hesapla
+    let totalScore = 0;
+    for (let i = 1; i <= 5; i++) {
+      const answer = form.querySelector(`input[name="q${i}"]:checked`).value;
+      switch(answer) {
+        case "A": totalScore += 1; break;
+        case "B": totalScore += 2; break;
+        case "C": totalScore += 3; break;
+        case "D": totalScore += 4; break;
+      }
+    }
+
+    // 2) Toplam puana göre finalde hangi resim çıkacak?
+    let selectedImageIndex;
+    if (totalScore <= 7) {
+      selectedImageIndex = 0; 
+    } else if (totalScore <= 10) {
+      selectedImageIndex = 1;
+    } else if (totalScore <= 12) {
+      selectedImageIndex = 2;
+    } else if (totalScore <= 14) {
+      selectedImageIndex = 3;
+    } else if (totalScore <= 16) {
+      selectedImageIndex = 4;
+    } else if (totalScore === 17) {
+      selectedImageIndex = 5;
+    } else if (totalScore === 18) {
+      selectedImageIndex = 6;
+    } else if (totalScore === 19) {
+      selectedImageIndex = 7;
+    } else if (totalScore === 20) {
+      selectedImageIndex = 8;
+    } else {
+      // Her ihtimale karşı
+      selectedImageIndex = 9;
+    }
+
+    // 3) Slot machine efekti (5 sn boyunca hızlı resim değişimi)
+    let currentIndex = 0;
+    resultDiv.style.display = "block";  // Ortadaki kutuyu aç
+    const intervalTime = 100;           // 0.1 sn aralıkla resimleri değiştir
+    const spinDuration = 5000;          // 5 sn sonra duracak
+
+    // Her 100ms'de bir resmi değiştir
+    const spinInterval = setInterval(() => {
+      resultImage.src = racoonImages[currentIndex];
+      currentIndex = (currentIndex + 1) % racoonImages.length;
+    }, intervalTime);
+
+    // 5 sn sonra durdur ve final resmi göster
+    setTimeout(() => {
+      clearInterval(spinInterval);
+      resultImage.src = racoonImages[selectedImageIndex];
+    }, spinDuration);
+  });
+});
