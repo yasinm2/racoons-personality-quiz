@@ -36,32 +36,35 @@ document.addEventListener("DOMContentLoaded", function() {
     // 1. sorudan 5. soruya kadar yanıtları al
     for (let i = 1; i <= 5; i++) {
       const answer = form.querySelector(`input[name="q${i}"]:checked`).value;
-      // Örnek puanlama:
       switch(answer) {
-        case "A":
-          totalScore += 1; 
-          break;
-        case "B":
-          totalScore += 2; 
-          break;
-        case "C":
-          totalScore += 3; 
-          break;
-        case "D":
-          totalScore += 4; 
-          break;
+        case "A": totalScore += 1; break;
+        case "B": totalScore += 2; break;
+        case "C": totalScore += 3; break;
+        case "D": totalScore += 4; break;
       }
     }
     
-    /* 
+    /*
      * Puan aralıklarını 15 sonuçla eşleştiriyoruz.
-     * Toplam puan 5 - 20 arasında. Bu 16 farklı skor demek (5,6,7,...,20).
-     * 15'e indirgemek için 5-6'yı tek bir sonucu paylaştırabiliriz ya da
-     * istediğin başka bir aralığı kombine edebilirsin.
+     * (5..6) -> index 0
+     *  7     -> index 1
+     *  8     -> index 2
+     *  9     -> index 3
+     * 10     -> index 4
+     * 11     -> index 5
+     * 12     -> index 6
+     * 13     -> index 7
+     * 14     -> index 8
+     * 15     -> index 9
+     * 16     -> index 10
+     * 17     -> index 11
+     * 18     -> index 12
+     * 19     -> index 13
+     * 20     -> index 14
      */
     let selectedIndex;
     if (totalScore <= 6) {
-      selectedIndex = 0;  // (5,6) -> 1. resim
+      selectedIndex = 0;
     } else if (totalScore === 7) {
       selectedIndex = 1;
     } else if (totalScore === 8) {
@@ -89,35 +92,37 @@ document.addEventListener("DOMContentLoaded", function() {
     } else if (totalScore === 19) {
       selectedIndex = 13;
     } else {
-      selectedIndex = 14; // (20) -> 15. resim
+      selectedIndex = 14; // 20
     }
     
-    // Modal'ı hemen göster
+    // Modal'ı göster
     modal.style.display = "block";
+    // Mesajı şimdilik boşaltalım (slayt sırasında bir şey göstermezsin)
+    resultText.textContent = "";
 
-    // 3.5 saniyelik slayt şovu ayarlayalım
-    let index = 0;
-    const intervalTime = 100;  // 0.3 saniye
-    const totalSlideshowTime = 3000; // 3.5 saniye
+    // Slayt gösterisi ayarları
+    const intervalTime = 100;   // 0.1 saniye
+    const totalTime = 3000;     // 3 saniye
+    const maxFrames = totalTime / intervalTime; // 3s / 0.1s = 30 kez
+    let frameCount = 0;         // Kaç kez resim değiştirdiğimizi sayacağız
+    let slideIndex = 0;         // raccoonData'da hangi resimde olduğumuzu takip
 
-    // Her 0.3 saniyede farklı rakun resmini göster
+    // Her 0.1 sn'de bir resim değiştir:
     const slideShow = setInterval(() => {
-      // Dizi sınırını aşarsa başa dönsün
-      resultImage.src = raccoonData[index].src;
-      // Resmin altında geçici olarak "Slayt Efekti..." gibi bir şey gösterebilirsin, ama
-      // istersen tamamen boş bırak. Şimdilik boş bırakalım:
-      resultText.textContent = "";
-      
-      index = (index + 1) % raccoonData.length; 
-    }, intervalTime);
+      if (frameCount < maxFrames) {
+        // Sıradaki resmi göster
+        resultImage.src = raccoonData[slideIndex].src;
+        slideIndex = (slideIndex + 1) % raccoonData.length;
+        frameCount++;
+      } else {
+        // 3 saniye (30 frame) dolduysa slaytı durdur
+        clearInterval(slideShow);
 
-    // 3.5 saniye sonra slayt'ı durdurup gerçek sonucu göster
-    setTimeout(() => {
-      clearInterval(slideShow);
-      // Gerçek sonuç resmini ve mesajı koyalım
-      resultImage.src = raccoonData[selectedIndex].src;
-      resultText.textContent = raccoonData[selectedIndex].message;
-    }, totalSlideshowTime);
+        // Artık asıl sonucu göster
+        resultImage.src = raccoonData[selectedIndex].src;
+        resultText.textContent = raccoonData[selectedIndex].message;
+      }
+    }, intervalTime);
   });
 
   // Modal kapatma butonu
