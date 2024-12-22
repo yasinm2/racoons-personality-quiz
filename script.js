@@ -18,7 +18,12 @@ document.addEventListener("DOMContentLoaded", function() {
     "images/racoons7.png",
     "images/racoons8.png",
     "images/racoons9.png",
-    "images/racoons10.png"
+    "images/racoons10.png",
+    "images/racoons11.jpeg",
+    "images/racoons12.png",
+    "images/racoons13.png",
+    "images/racoons14.jpeg",
+    "images/racoons15.jpeg"
   ];
   
   form.addEventListener("submit", function(e) {
