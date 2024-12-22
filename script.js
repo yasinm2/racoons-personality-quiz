@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 3.5 saniyelik slayt şovu ayarlayalım
     let index = 0;
-    const intervalTime = 300;  // 0.3 saniye
+    const intervalTime = 200;  // 0.3 saniye
     const totalSlideshowTime = 3500; // 3.5 saniye
 
     // Her 0.3 saniyede farklı rakun resmini göster
