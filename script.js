@@ -10,21 +10,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // 15 farklı rakun görseli ve her birine ait mesaj
   const raccoonData = [
-    { src: "images/racoons1.jpeg",  message: "Sen eski kral rakunsun !" },
-    { src: "images/racoons2.jpeg",  message: "Sen gezici rakunsun" },
-    { src: "images/racoons3.jpeg",  message: "Sen keşifçi rakunsun" },
-    { src: "images/racoons4.jpeg",  message: "Sen çılgın rakunsun" },
-    { src: "images/racoons5.png",   message: "Sen tarz bir rakunsun" },
-    { src: "images/racoons6.png",   message: "Sen asker rakunsun" },
-    { src: "images/racoons7.png",   message: "Sen yeşil goblin rakunsun" },
-    { src: "images/racoons8.png",   message: "Sen şövalye rakunsun" },
-    { src: "images/racoons9.png",   message: "Sen karıncayiyen keşifçi rakunsun" },
-    { src: "images/racoons10.png",  message: "Sen hapishane kaçkını rakunsun" },
-    { src: "images/racoons11.jpeg", message: "Sen hayvansever rakunsun" },
-    { src: "images/racoons12.png",  message: "Sen büyücü rakunsun" },
-    { src: "images/racoons13.png",  message: "Sen kırmızı başlıklı rakunsun" },
-    { src: "images/racoons14.jpeg", message: "Sen gerilla rakunsun" },
-    { src: "images/racoons15.jpeg", message: "Sen yoda rakunsun" }
+    { src: "images/racoons1.jpeg",  message: "Sen imparator rakunsun!" },
+    { src: "images/racoons2.jpeg",  message: "Sen gezici rakunsun!" },
+    { src: "images/racoons3.jpeg",  message: "Sen keşifçi rakunsun!" },
+    { src: "images/racoons4.jpeg",  message: "Sen çılgın rakunsun!" },
+    { src: "images/racoons5.png",   message: "Sen tarz bir rakunsun!" },
+    { src: "images/racoons6.png",   message: "Sen yeşil goblin rakunsun!" },
+    { src: "images/racoons7.png",   message:  "Sen asker rakunsun!"},
+    { src: "images/racoons8.png",   message: "Sen şövalye rakunsun!" },
+    { src: "images/racoons9.png",   message: "Sen karıncayiyen keşifçi rakunsun!" },
+    { src: "images/racoons10.png",  message: "Sen hapishane kaçkını rakunsun!" },
+    { src: "images/racoons11.jpeg", message: "Sen hayvansever rakunsun!" },
+    { src: "images/racoons12.png",  message: "Sen büyücü rakunsun!" },
+    { src: "images/racoons13.png",  message: "Sen kırmızı başlıklı rakunsun!" },
+    { src: "images/racoons14.jpeg", message: "Sen gerilla rakunsun!" },
+    { src: "images/racoons15.jpeg", message: "Sen yoda rakunsun!" }
   ];
   
   form.addEventListener("submit", function(e) {
